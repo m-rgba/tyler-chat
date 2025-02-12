@@ -128,11 +128,44 @@ thread_store = ThreadStore(db_url)
 file_store = FileStore()
 logger.info(f"Initialized file store at: {file_store.base_path}")
 
+
+# EXAMPLES:
+
+# weather_async_tool = {
+#     "definition": {
+#         "type": "function",
+#         "function": {
+#             "name": "get_weather_async",
+#             "description": "Get the current weather for a location (async version)",
+#             "parameters": {
+#                 "type": "object",
+#                 "properties": {
+#                     "location": {
+#                         "type": "string",
+#                         "description": "The city and country"
+#                     }
+#                 },
+#                 "required": ["location"]
+#             }
+#         }
+#     },
+#     "implementation": get_weather_async_implementation
+# }
+
+# async def get_weather_async_implementation(location: str) -> str:
+#     """
+#     Async implementation of the weather tool.
+#     In a real application, this would call a weather API asynchronously.
+#     """
+#     # Simulate async API call
+#     await asyncio.sleep(1)
+#     return f"The weather in {location} is sunny with a temperature of 72°F (async)"
+
 agent = Agent(
     model_name="gpt-4o",
     purpose="To help with general questions",
     tools=[
-        "web"
+    #    weather_async_tool 
     ],
     thread_store=thread_store
 )
